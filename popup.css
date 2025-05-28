@@ -1,0 +1,610 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(to bottom, #f9fafb, #e5e7eb); /* Градиент для белой темы */
+  color: #1f2937;
+  width: 400px;
+  padding: 20px;
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px linear-gradient(to bottom, #f9fafb, #e5e7eb), 0 4px 6px rgba(0, 0, 0, 0.1); /* Градиентная рамка + тень */
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark-theme {
+  background: linear-gradient(to bottom, #1f2937, #374151); /* Градиент для тёмной темы */
+  color: #f9fafb;
+  box-shadow: 0 0 0 2px linear-gradient(to bottom, #1f2937, #374151), 0 4px 6px rgba(0, 0, 0, 0.3); /* Градиентная рамка + тень */
+}
+
+.header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 10px;
+}
+
+.title-group {
+  flex-grow: 1;
+}
+
+/* Стили для логотипов */
+.app-logo {
+  width: 50%;
+  height: 30%;
+}
+
+.app-logo-light {
+  display: block;
+}
+
+.app-logo-dark {
+  display: none;
+}
+
+.dark-theme .app-logo-light {
+  display: none;
+}
+
+.dark-theme .app-logo-dark {
+  display: block;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.refresh-button, .guide-button {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Светлая тема */
+.refresh-button, .guide-button {
+  background-color: transparent;
+  transition: box-shadow 0.3s;
+}
+
+.refresh-button:hover, .guide-button:hover {
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* Тёмная тема */
+.dark-theme .refresh-button, .dark-theme .guide-button {
+  background-color: transparent;
+  transition: box-shadow 0.3s;
+}
+
+.dark-theme .refresh-button:hover, .dark-theme .guide-button:hover {
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.refresh-button:active, .guide-button:active {
+  transform: scale(0.95);
+}
+
+.button-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.theme-toggle-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+
+.theme-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #6b7280;
+  transition: 0.5s;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.toggle-slider:before {
+  content: none; /* Убираем круглый слайдер */
+}
+
+input:checked + .toggle-slider {
+  background-color: #3b82f6;
+}
+
+.toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+}
+
+.light-icon {
+  color: #ffffff;
+}
+
+.dark-icon {
+  color: #ffffff;
+}
+
+input:checked + .toggle-slider .light-icon {
+  opacity: 0;
+}
+
+input:not(:checked) + .toggle-slider .dark-icon {
+  opacity: 0;
+}
+
+/* Стили для блока сортировки */
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.sort-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.dark-theme .sort-label {
+  color: #e5e7eb;
+}
+
+.sort-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.sort-time-button, .sort-alpha-button {
+  width: 30px;
+  height: 20px;
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background-color: transparent;
+}
+
+/* Светлая тема для кнопок сортировки */
+.sort-time-button, .sort-alpha-button {
+  color: #1f2937;
+}
+
+.sort-time-button:hover, .sort-alpha-button:hover {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Тёмная тема для кнопок сортировки */
+.dark-theme .sort-time-button, .dark-theme .sort-alpha-button {
+  color: #e5e7eb;
+}
+
+.dark-theme .sort-time-button:hover, .dark-theme .sort-alpha-button:hover {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.sort-time-button:active, .sort-alpha-button:active {
+  transform: scale(0.95);
+}
+
+/* Стили для активной кнопки сортировки */
+.sort-time-button.active, .sort-alpha-button.active {
+  background-color: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.dark-theme .sort-time-button.active, .dark-theme .sort-alpha-button.active {
+  background-color: #60a5fa;
+  color: #1f2937;
+}
+
+.category {
+  background-color: #ffffff;
+  border-left: 5px solid transparent;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.dark-theme .category {
+  background-color: #2d3748;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#study {
+  border-left-color: #3b82f6;
+}
+
+#work {
+  border-left-color: #10b981;
+}
+
+#entertainment {
+  border-left-color: #8b5cf6;
+}
+
+#other {
+  border-left-color: #ff00ff;
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between; /* Распределяем элементы по краям */
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: background-color 0.2s ease;
+}
+
+#study .category-header {
+  color: #2563eb;
+}
+
+#work .category-header {
+  color: #059669;
+}
+
+#entertainment .category-header {
+  color: #7c3aed;
+}
+
+#other .category-header {
+  color: #ff00ff;
+}
+
+.dark-theme .category-header {
+  color: #e5e7eb;
+}
+
+.category-header:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+#study .category-header:hover {
+  background-color: #c2d7ff;
+}
+
+#work .category-header:hover {
+  background-color: #d1fae5;
+}
+
+#entertainment .category-header:hover {
+  background-color: #e0ceff;
+}
+
+#other .category-header:hover {
+  background-color: #ffcdff;
+}
+
+.dark-theme .category-header:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+#study.dark-theme .category-header:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+#work.dark-theme .category-header:hover {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+#entertainment.dark-theme .category-header:hover {
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+#other.dark-theme .category-header:hover {
+  background-color: rgba(107, 114, 128, 0.1);
+}
+
+.category-header span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.tab-count {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1f2937;
+  margin-left: 8px;
+}
+
+.dark-theme .tab-count {
+  color: #e5e7eb;
+}
+
+.category-list {
+  padding: 0 16px 12px 16px;
+}
+
+.category-list.hidden {
+  display: none;
+}
+
+.category-list li {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.dark-theme .category-list li {
+  background-color: #374151;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#study li:hover {
+  background-color: #dbeafe;
+}
+
+#work li:hover {
+  background-color: #d1fae5;
+}
+
+#entertainment li:hover {
+  background-color: #ede9fe;
+}
+
+#other li:hover {
+  background-color: #f3f4f6;
+}
+
+.dark-theme #study li:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.dark-theme #work li:hover {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.dark-theme #entertainment li:hover {
+  background-color: rgba(139, 92, 246, 0.1);
+}
+
+.dark-theme #other li:hover {
+  background-color: rgba(107, 114, 128, 0.1);
+}
+
+.category-list li img {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  border-radius: 2px;
+}
+
+.category-list li span {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dark-theme .category-list li span {
+  color: #e5e7eb;
+}
+
+.category-select {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dark-theme .category-select {
+  background-color: #4b5563;
+  color: #e5e7eb;
+}
+
+#study .category-select {
+  border-color: #93c5fd;
+}
+
+#work .category-select {
+  border-color: #6ee7b7;
+}
+
+#entertainment .category-select {
+  border-color: #c4b5fd;
+}
+
+#other .category-select {
+  border-color: #d1d5db;
+}
+
+.category-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+#study .category-select:focus {
+  box-shadow: 0 0 0 2px #93c5fd;
+}
+
+#work .category-select:focus {
+  box-shadow: 0 0 0 2px #6ee7b7;
+}
+
+#entertainment .category-select:focus {
+  box-shadow: 0 0 0 2px #c4b5fd;
+}
+
+#other .category-select:focus {
+  box-shadow: 0 0 0 2px #d1d5db;
+}
+
+.dark-theme .category-select:focus {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Стили для кнопки закрытия вкладки */
+.close-tab-button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ef4444;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.close-tab-button:hover {
+  color: #dc2626;
+}
+
+.dark-theme .close-tab-button {
+  color: #f87171;
+}
+
+.dark-theme .close-tab-button:hover {
+  color: #ef4444;
+}
+
+/* Стили для модального окна */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.dark-theme .modal-content {
+  background-color: #2d3748;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.dark-theme .close {
+  color: #e5e7eb;
+}
+
+.close:hover {
+  color: #1f2937;
+}
+
+.dark-theme .close:hover {
+  color: #f9fafb;
+}
+
+.modal-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1f2937;
+}
+
+.dark-theme .modal-content h3 {
+  color: #e5e7eb;
+}
+
+.modal-content p {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 12px;
+}
+
+.dark-theme .modal-content p {
+  color: #d1d5db;
+}
+
+.modal-content ol {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+.modal-content ol li {
+  font-size: 14px;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+.dark-theme .modal-content ol li {
+  color: #e5e7eb;
+}
+
+.modal-content ol li strong {
+  font-weight: 600;
+}
