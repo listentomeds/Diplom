@@ -780,9 +780,9 @@ async function loadModel() {
         other: 1
       };
 
-      // Новые веса: домен (30%), заголовки (50%), содержимое (20%)
-      const DOMAIN_WEIGHT = 0.3;
-      const TITLE_WEIGHT = 0.5;
+      // Новые веса: домен (50%), заголовки (30%), содержимое (20%)
+      const DOMAIN_WEIGHT = 0.5;
+      const TITLE_WEIGHT = 0.3;
       const CONTENT_WEIGHT = 0.2;
 
       console.log('Начальные значения scores:', scores);
